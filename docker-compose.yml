@@ -1,0 +1,33 @@
+version: "3"
+services:
+
+  rabbitmq:
+    image: "rabbitmq:3.6-management-alpine"
+    volumes:
+      - ./deploy:/deploy
+    ports:
+      # The standard AMQP protocol port
+      - "5672:5672"
+      # HTTP management UI
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    command: sh /deploy/rabbitmq-vhost-setup.sh
+
+  app:
+    build:
+      context: .
+    environment:
+      - FLASK_ENV=developement
+    ports:
+      - "5000:5000"
+
+  worker:
+    build:
+      context: .
+    command: celery worker --beat --concurrency=1 --loglevel=debug
+
+
+#networks:
+#  celery_demo:
