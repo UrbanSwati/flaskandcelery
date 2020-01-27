@@ -2,7 +2,9 @@ version: "3.4"
 services:
 
   rabbitmq:
-    network_mode: host
+    # network_mode: host
+    networks:
+      - celery_demo
     image: "rabbitmq:3.6-management-alpine"
     volumes:
       - ./deploy:/deploy
@@ -17,7 +19,9 @@ services:
     command: sh /deploy/rabbitmq-vhost-setup.sh
 
   app:
-    network_mode: host
+    # network_mode: host
+    networks:
+      - celery_demo
     build:
       context: .
     command: flask run
@@ -27,7 +31,12 @@ services:
       - 5000:5000
 
   worker:
-    network_mode: host
+    # network_mode: host
+    networks:
+      - celery_demo
     build:
       context: .
     command: celery worker --beat --concurrency=1 --loglevel=debug
+ 
+ networks:
+  celery_demo:
