@@ -17,10 +17,3 @@ task_routes = {
         'routing_key': 'background.tasks.add'
     }
 }
-
-# task_queues = {
-#     'background.tasks.add': {
-#         'exchange': 'background.tasks.add',
-#         'routing_key': 'background.tasks.add',
-#     },
-# }
