@@ -9,7 +9,9 @@ class BackgroundProcessTask(Task):
     ignore_result = True
     default_retry_delay = 60  # 1 minute.
     max_retries = 5
+    serializer = 'pickle'
 
     def run(self, first_number, second_number, **kwargs):
         answer = first_number + second_number
         print(f'Done with task at {datetime.now()} : {first_number} + {second_number} = {answer}')
+        return answer
