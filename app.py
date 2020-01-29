@@ -17,7 +17,7 @@ def do_task():
     first_number = randint(0, 7 ** 7)
     second_number = randint(0, 7 ** 7)
     BackgroundProcessTask().delay(first_number, second_number)
-    return f'{datetime.now()} Adding {first_number} and {second_number}'
+    return f'{datetime.now()} Adding {first_number} and {second_number} = {answer.get()}'
 
 
 if __name__ == '__main__':
