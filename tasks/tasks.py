@@ -6,7 +6,7 @@ from datetime import datetime
 class BackgroundProcessTask(Task):
     name = "background.tasks.add"
     routing_key = "background.tasks.add"
-    ignore_result = True
+    ignore_result = False
     default_retry_delay = 60  # 1 minute.
     max_retries = 5
     serializer = 'pickle'
