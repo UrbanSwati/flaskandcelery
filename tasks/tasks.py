@@ -4,6 +4,11 @@ from datetime import datetime
 
 
 class BackgroundProcessTask(Task):
+    """
+    set ignore_result to True if you don't need the result 
+    This will return None on .get() of the task result
+    """
+    
     name = "background.tasks.add"
     routing_key = "background.tasks.add"
     ignore_result = False
